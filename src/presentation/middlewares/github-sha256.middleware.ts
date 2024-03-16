@@ -10,7 +10,7 @@ const verify_signature = (req: Request) => {
             .update(JSON.stringify(req.body))
             .digest('hex')
         const xHubSignature = req.header('x-hub-signature-256') ?? ''
-        let trusted = Buffer.from(`sha256=${signature}, 'ascii`)
+        let trusted = Buffer.from(`sha256=${signature}`, 'ascii')
         let untrusted = Buffer.from(xHubSignature, 'ascii')
         return crypto.timingSafeEqual(trusted, untrusted)
 
